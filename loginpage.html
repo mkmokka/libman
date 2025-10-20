@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Login Page</title>
+</head>
+<body>
+  <h2>Login</h2>
+  <input id="logEmail" type="email" placeholder="Email" required />
+  <input id="logPass" type="password" placeholder="Password" required />
+  <button onclick="loginWithPassword()">Login</button>
+
+  <script type="module">
+    import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-auth.js";
+
+    const auth = getAuth();
+
+    async function loginWithPassword() {
+      const email = document.getElementById("logEmail").value;
+      const password = document.getElementById("logPass").value;
+      try {
+        await signInWithEmailAndPassword(auth, email, password);
+        alert("Login successful!");
+        window.location.href = "game.html";
+      } catch (err) {
+        alert(err.message);
+      }
+    }
+
+    window.loginWithPassword = loginWithPassword;
+  </script>
+</body>
+</html>
